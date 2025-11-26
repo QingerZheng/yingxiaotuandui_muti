@@ -1,0 +1,20 @@
+{
+    "dependencies": [
+        "."
+    ],
+    "graphs": {
+        "agent": "app:get_graph",
+        "context_update_agent": "app:get_context_update_graph",
+        "wechat_moment_agent": "./agents/wechat/moment_agent.py:wechat_moment_graph",
+        "user_analysis_reports_agent": "./agents/analysis_report/user_analysis_reports.py:user_analysis_graph",
+        "user_analysis_reports_config_agent": "./agents/analysis_report/user_analysis_reports_config.py:user_analysis_config_graph",
+        "profile_label_agent": "./agents/user_profile/label_agent_v2.py:profile_label_graph",
+        "profile_agent": "./agents/user_profile/label_agent_v2.py:profile_analysis_graph",
+        "friend_post_comment_agent": "./agents/post_comments/comment_v3.py:comment_analysis_graph",
+        "sales_advice_agent": "./agents/sales_advice/agent.py:sales_chat_suggestion_graph",
+        "persona_config_agent": "./agents/persona_config/persona_update.py:persona_config_graph",
+
+        "chat_marketing_agent": "./agents/marketing_assistant/chat_marketing_agent.py:chat_marketing_graph"
+    },
+    "env": ".env"
+}

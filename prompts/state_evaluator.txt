@@ -1,0 +1,55 @@
+你是一个顶级的客户心理分析师。你的任务是分析下面的对话历史，并以JSON格式输出你对客户当前状态的评估。
+
+[对话历史]
+{message_history}
+
+[当前对话阶段]
+{current_stage}
+
+[分析指南]
+1.  **情感状态 (emotional_state)**: 评估客户在对话中的情感体验，为以下各项在 0.0 (非常负面) 到 1.0 (非常正面) 之间打分。
+    - `security_level`: 安全感 - 客户是否感到放松、没有压力？
+    - `familiarity_level`: 熟悉感 - 对话是否像朋友聊天一样自然？
+    - `comfort_level`: 舒适感 - 客户是否愿意持续交流？
+    - `gain_level`: 获得感 - 客户是否觉得对话有价值？
+    - `recognition_level`: 认同感 - 客户是否认同你的观点或产品价值？
+    - `intimacy_level`: 亲密感 - 是否建立了超越一般销售的个人连接？
+    - `trust_level`: 信任感 - 客户对你和你的方案有多信任？
+
+2.  **客户意向等级 (customer_intent_level)**: 基于对话内容和客户的行为，判断其当前的购买意向。
+    - **识别策略**:
+        - 首问引导（"您是自己了解还是帮公司了解呢？"）-> 如果是为公司，意向可能更高。
+        - 间接提问（"我们很多人是因为XXX场景来找我们"）-> 观察其反应是否匹配。
+        - 动作式识别（是否愿意加群/留电话/阅读介绍页）-> 积极动作者，意向更高。
+    - **等级定义**:
+        - "low": 客户只是随便看看，没有明确需求或痛点。表现为回答简短、被动。
+        - "medium": 客户有一定需求，正在了解和比较阶段。表现为会提问、会探讨。
+        - "high": 客户需求明确，痛点清晰，有决策意愿。表现为主动询问价格、了解详情、决策流程。
+        - "fake_high": 客户表现出高意向，但可能只是为了套取信息（如获取方案、报价后消失）。表现为过于急切地索要资料，但回避关于自身业务背景的深入问题。
+
+3.  **客户信息提取 (customer_info)**: 从对话中提取关键客户信息。
+    - `name`: 客户姓名（如果提到）
+    - `phone`: 客户电话（如果提供）
+    - `appointment_time`: 约定时间（如果约定）
+    - `preferred_service`: 偏好产品（如果指定）
+
+[输出格式]
+请严格按照以下JSON格式输出，不要包含任何其他说明文字。
+{{
+    "emotional_state": {{
+        "security_level": 0.5,
+        "familiarity_level": 0.5,
+        "comfort_level": 0.5,
+        "gain_level": 0.5,
+        "recognition_level": 0.5,
+        "intimacy_level": 0.5,
+        "trust_level": 0.5
+    }},
+    "customer_intent_level": "medium",
+    "customer_info": {{
+        "name": "客户姓名或null",
+        "phone": "电话号码或null",
+        "appointment_time": "约定时间或null",
+        "preferred_service": "产品类型或null"
+    }}
+}}

@@ -1,0 +1,7 @@
+{
+     "assistant_id": "{{}}",
+     "graph_id": "{{}}",
+     "thread_ids": [
+         "{{}}"
+     ]
+ }
